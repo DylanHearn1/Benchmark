@@ -41,15 +41,19 @@
     top: 100dvh;
 }
 
-.anchor-gradient {
+// CUSTOM BG FOR ANCHOR TAGS LEFT TO RIGHT BG TRANSITION
+
+.bg-anchor-gradient {
+    background: linear-gradient(90deg, rgba(36,107,239,1) 0%, rgba(0,255,187,1) 100%);
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+
     border-image: linear-gradient(90deg, rgba(36,107,239,1) 0%, rgba(0,255,187,1) 100%);
     border-width: 2px;
     border-style: solid;
     border-image-slice: 1;
-    transition: ease 300ms;
 
     &:hover {
-        background: linear-gradient(90deg, rgba(36,107,239,1) 0%, rgba(0,255,187,1) 100%);
-        color: black;
+        background-size: 100% 100%;
     }
 }

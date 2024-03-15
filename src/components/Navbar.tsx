@@ -1,7 +1,5 @@
 import AnchorGradient from './AnchorGradient';
 import { Link } from 'react-router-dom';
-import { Route, Routes } from 'react-router-dom';
-import LoginPage from '../pages/LoginPage';
 
 const Navbar = () => {
   return (
@@ -13,16 +11,12 @@ const Navbar = () => {
             <div className="items-center flex space-x-5">
               <Link to={'/login'}>Login</Link>
               <li>
-                <AnchorGradient href="#" text="Register" />
+                <AnchorGradient href="/register" text="Register" />
               </li>
             </div>
           </ul>
         </div>
       </nav>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/" element={<LoginPage />} />
-      </Routes>
     </>
   );
 };

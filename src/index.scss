@@ -34,7 +34,7 @@
 }
 
 .text-p {
-    font-size: 1.2em;
+    font-size: 1.1em;
 }
 
 .top-screen {
@@ -52,8 +52,26 @@
     border-width: 2px;
     border-style: solid;
     border-image-slice: 1;
+    transition: ease .3s;
 
     &:hover {
         background-size: 100% 100%;
+        color: white;
+    }
+}
+
+.border-input {
+    outline: none;
+    border: solid rgb(179, 179, 179) 2px;
+
+    &:focus {
+        background: linear-gradient(90deg, rgba(36,107,239,1) 0%, rgba(0,255,187,1) 100%);
+        background-size: 0% 100%;
+        background-repeat: no-repeat;
+    
+        border-image: linear-gradient(90deg, rgba(36,107,239,1) 0%, rgba(0,255,187,1) 100%);
+        border-width: 3px;
+        border-style: solid;
+        border-image-slice: 1;
     }
 }

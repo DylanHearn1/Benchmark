@@ -5,7 +5,7 @@ interface AnchorGradientProps {
 
 const AnchorGradient = ({ href, text }: AnchorGradientProps) => {
   return (
-    <div className="ease-in-out duration-300 bg-anchor-gradient px-3 py-1 hover:text-black/80 cursor-pointer">
+    <div className="bg-anchor-gradient px-3 py-1 hover:text-black/80 cursor-pointer">
       <a href={href} className="test">
         {text}
       </a>

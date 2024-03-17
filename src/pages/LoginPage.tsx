@@ -1,7 +1,15 @@
 import { useFormik } from 'formik';
+import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { logInContext } from '../App';
 
 const LoginPage = () => {
   const url = 'http://localhost:3000/login';
+  let navigate = useNavigate();
+
+  const [loggedIn, setLoggedIn] = useContext(logInContext);
+
+  const [loginStatus, setLoginStatus] = useState({ status: '' });
 
   const formik = useFormik({
     initialValues: {
@@ -17,11 +25,16 @@ const LoginPage = () => {
         body: JSON.stringify(values),
       });
       if (!response.ok) {
-        throw new Error('nopeee');
+        throw new Error("Server couldn't respond");
       }
 
       const data = await response.json();
       console.log(data);
+      setLoginStatus(data);
+      if ('token' in data) {
+        navigate('/');
+        setLoggedIn(true);
+      }
     },
   });
 
@@ -63,6 +76,7 @@ const LoginPage = () => {
             >
               Login
             </button>
+            <p className="text-red-500">{loginStatus.status}</p>
             <p className="text-center pt-10">
               Don't have an account?{' '}
               <a href="/register" className="text-blue-500 font-medium ">

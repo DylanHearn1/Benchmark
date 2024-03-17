@@ -53,6 +53,7 @@
     border-style: solid;
     border-image-slice: 1;
     transition: ease .3s;
+    cursor: pointer;
 
     &:hover {
         background-size: 100% 100%;

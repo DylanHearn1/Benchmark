@@ -1,13 +1,13 @@
 import { useFormik } from 'formik';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { logInContext } from '../App';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const LoginPage = () => {
   const url = 'http://localhost:3000/login';
   let navigate = useNavigate();
 
-  const [loggedIn, setLoggedIn] = useContext(logInContext);
+  const { setLoggedIn, setUsername } = useAuthContext();
 
   const [loginStatus, setLoginStatus] = useState({ status: '' });
 
@@ -34,6 +34,7 @@ const LoginPage = () => {
       if ('token' in data) {
         navigate('/');
         setLoggedIn(true);
+        setUsername(data.username);
       }
     },
   });

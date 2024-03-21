@@ -3,17 +3,22 @@ import { Link } from 'react-router-dom';
 import user from './../assets/user.svg';
 import { useState } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const { loggedIn, setLoggedIn, username } = useAuthContext();
   const [showSignOut, setShowSignOut] = useState(false);
+
+  let navigate = useNavigate();
 
   return (
     <>
       <nav className="fixed text-white text-p z-50 w-screen left-0 py-4 bg-black">
         <div className="w-1280px mx-auto">
           <ul className="flex items-center justify-between">
-            <a href="#">Logo</a>
+            <div onClick={() => navigate('/')} className="cursor-pointer">
+              logo
+            </div>
             {loggedIn ? (
               <>
                 <div

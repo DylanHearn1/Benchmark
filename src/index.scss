@@ -30,7 +30,7 @@
 }
 
 .w-1280px {
-    width: 1280px;
+    max-width: 1280px;
 }
 
 .text-p {
@@ -75,4 +75,15 @@
         border-style: solid;
         border-image-slice: 1;
     }
+}
+
+.border-square {
+    border-image: linear-gradient(90deg, rgba(36,107,239,1) 0%, rgba(0,255,187,1) 100%);
+    border-width: 2px;
+    border-style: solid;
+    border-image-slice: 1;
+    transition: ease .3s;
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
 }

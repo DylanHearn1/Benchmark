@@ -6,10 +6,16 @@ const PatternMemory = () => {
   const [attemptSequence, setAttemptSequence] = useState<Number[]>([]);
   const [activeSquare, setActiveSquare] = useState<Number>(10);
   const [clickedSquare, setClickedSquare] = useState<Number>(10);
-  const [gameStatus, setGameStatus] = useState('');
+  const [gameScore, setGameScore] = useState(0);
 
   const startRound = () => {
-    gameStatus && setGameStatus('');
+    setCorrectSequence((prev) => [...prev, Math.floor(Math.random() * 9)]);
+  };
+
+  const newRound = () => {
+    setCorrectSequence([]);
+    setAttemptSequence([]);
+    setGameScore(0);
     setCorrectSequence((prev) => [...prev, Math.floor(Math.random() * 9)]);
   };
 
@@ -43,10 +49,10 @@ const PatternMemory = () => {
         if (attemptSequence.length === correctSequence.length) {
           setAttemptSequence([]);
           startRound();
-          setGameStatus(`Score: ${attemptSequence.length}`);
+          setGameScore(attemptSequence.length);
         }
       } else {
-        setGameStatus(`Incorrect, game reset!`);
+        setGameScore(0);
         setCorrectSequence([]);
         setAttemptSequence([]);
       }
@@ -54,8 +60,8 @@ const PatternMemory = () => {
   }, [attemptSequence]);
 
   return (
-    <div className="text-white bg-black text-p">
-      <div className="grid grid-cols-3 gap-4">
+    <div className="text-white bg-black text-p flex flex-col items-center">
+      <div className="grid-cols-3 gap-4 inline-grid">
         {squares.map((_, index) => (
           <button
             className={
@@ -70,14 +76,11 @@ const PatternMemory = () => {
           ></button>
         ))}
       </div>
-      <div className="flex justify-between mt-10">
-        <button
-          onClick={() => startRound()}
-          className="bg-anchor-gradient px-2"
-        >
+      <div className="flex justify-between mt-10 space-x-10">
+        <button onClick={() => newRound()} className="bg-anchor-gradient px-2">
           New game
         </button>
-        <p>{gameStatus}</p>
+        <p>Score: {`${gameScore}`}</p>
       </div>
     </div>
   );

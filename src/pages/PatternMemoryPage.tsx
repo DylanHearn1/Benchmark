@@ -6,7 +6,7 @@ const PatternMemoryPage = () => {
     <>
       <SingleGame
         title="Pattern Memory"
-        description="remember"
+        description="Remember the pattern displayed, then recite it."
         game={<PatternMemoryGame />}
       />
     </>

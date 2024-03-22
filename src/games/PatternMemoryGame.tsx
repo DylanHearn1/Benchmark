@@ -6,24 +6,27 @@ const PatternMemory = () => {
   const [attemptSequence, setAttemptSequence] = useState<Number[]>([]);
   const [activeSquare, setActiveSquare] = useState<Number>(10);
   const [clickedSquare, setClickedSquare] = useState<Number>(10);
+  const [gameStatus, setGameStatus] = useState('');
 
   const startRound = () => {
+    gameStatus && setGameStatus('');
     setCorrectSequence((prev) => [...prev, Math.floor(Math.random() * 9)]);
   };
 
   const handleNumberClick = async (input: number) => {
     setAttemptSequence((prev) => [...prev, input]);
     setClickedSquare(input);
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 200));
     setClickedSquare(10);
   };
 
   useEffect(() => {
     const highlightSequence = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 600));
       for (let i = 0; i < correctSequence.length; i++) {
+        await new Promise((resolve) => setTimeout(resolve, 200));
         setActiveSquare(correctSequence[i]);
-        await new Promise((resolve) => setTimeout(resolve, 800));
+        await new Promise((resolve) => setTimeout(resolve, 400));
         setActiveSquare(10);
       }
     };
@@ -40,8 +43,10 @@ const PatternMemory = () => {
         if (attemptSequence.length === correctSequence.length) {
           setAttemptSequence([]);
           startRound();
+          setGameStatus(`Score: ${attemptSequence.length}`);
         }
       } else {
+        setGameStatus(`Incorrect, game reset!`);
         setCorrectSequence([]);
         setAttemptSequence([]);
       }
@@ -49,13 +54,13 @@ const PatternMemory = () => {
   }, [attemptSequence]);
 
   return (
-    <div className="text-white bg-black">
+    <div className="text-white bg-black text-p">
       <div className="grid grid-cols-3 gap-4">
         {squares.map((_, index) => (
           <button
             className={
               activeSquare === index
-                ? 'border-square bg-blue-500'
+                ? 'border-square bg-gradient'
                 : clickedSquare === index
                 ? 'border-square bg-white'
                 : 'border-square'
@@ -65,7 +70,15 @@ const PatternMemory = () => {
           ></button>
         ))}
       </div>
-      <button onClick={() => startRound()}>Start</button>
+      <div className="flex justify-between mt-10">
+        <button
+          onClick={() => startRound()}
+          className="bg-anchor-gradient px-2"
+        >
+          New game
+        </button>
+        <p>{gameStatus}</p>
+      </div>
     </div>
   );
 };

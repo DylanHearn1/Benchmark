@@ -57,7 +57,6 @@
 
     &:hover {
         background-size: 100% 100%;
-        color: white;
     }
 }
 
@@ -82,7 +81,7 @@
     border-width: 2px;
     border-style: solid;
     border-image-slice: 1;
-    transition: ease .3s;
+    transition: ease .1s;
     cursor: pointer;
     width: 100px;
     height: 100px;

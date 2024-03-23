@@ -80,9 +80,12 @@ const LoginPage = () => {
             <p className="text-red-500">{loginStatus.status}</p>
             <p className="text-center pt-10">
               Don't have an account?{' '}
-              <a href="/register" className="text-blue-500 font-medium ">
+              <p
+                onClick={() => navigate('/register')}
+                className="text-blue-500 font-medium cursor-pointer"
+              >
                 Register
-              </a>
+              </p>
             </p>
           </form>
         </aside>

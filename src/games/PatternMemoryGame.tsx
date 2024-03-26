@@ -7,6 +7,7 @@ const PatternMemory = () => {
   const [activeSquare, setActiveSquare] = useState<Number>(10);
   const [clickedSquare, setClickedSquare] = useState<Number>(10);
   const [gameScore, setGameScore] = useState(0);
+  const [isGameActive, setIsGameActive] = useState(false);
 
   const startRound = () => {
     setCorrectSequence((prev) => [...prev, Math.floor(Math.random() * 9)]);
@@ -27,6 +28,7 @@ const PatternMemory = () => {
   };
 
   useEffect(() => {
+    setIsGameActive(true);
     const highlightSequence = async () => {
       await new Promise((resolve) => setTimeout(resolve, 600));
       for (let i = 0; i < correctSequence.length; i++) {
@@ -35,6 +37,7 @@ const PatternMemory = () => {
         await new Promise((resolve) => setTimeout(resolve, 400));
         setActiveSquare(10);
       }
+      setIsGameActive(false);
     };
     highlightSequence();
   }, [correctSequence]);
@@ -72,7 +75,7 @@ const PatternMemory = () => {
                 : 'border-square'
             }
             key={index}
-            onClick={() => handleNumberClick(index)}
+            onClick={() => (isGameActive ? null : handleNumberClick(index))}
           ></button>
         ))}
       </div>

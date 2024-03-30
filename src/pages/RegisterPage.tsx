@@ -23,6 +23,7 @@ const validate = (values: formValues) => {
     errors.password = 'Must be at least 10 characters';
   }
 
+  console.log(errors);
   return errors;
 };
 
@@ -38,6 +39,7 @@ const RegisterPage = () => {
     },
     validate,
     onSubmit: async (values) => {
+      console.log(values);
       const response = await fetch(url, {
         method: 'POST',
         headers: {

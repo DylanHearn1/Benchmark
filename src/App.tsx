@@ -6,7 +6,7 @@ import RegisterPage from './pages/RegisterPage';
 import LandingPage from './pages/LandingPage';
 import PatternMemoryPage from './pages/PatternMemoryPage';
 
-export const logInContext = createContext<logInInterface | null>(null!);
+export const logInContext = createContext<logInInterface>(null!);
 
 export interface logInInterface {
   loggedIn: boolean;

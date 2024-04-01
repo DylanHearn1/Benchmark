@@ -1,5 +1,6 @@
 import { useFormik } from 'formik';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface formValues {
   username: string;
@@ -7,10 +8,7 @@ interface formValues {
 }
 
 const validate = (values: formValues) => {
-  const errors = {
-    username: '',
-    password: '',
-  };
+  const errors: { username?: string; password?: string } = {};
   if (!values.username) {
     errors.username = 'Required';
   } else if (values.username.length < 6) {
@@ -22,12 +20,11 @@ const validate = (values: formValues) => {
   } else if (values.password.length < 10) {
     errors.password = 'Must be at least 10 characters';
   }
-
-  console.log(errors);
   return errors;
 };
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
   const url = 'http://localhost:3000/register';
 
   const [registerStatus, setRegisterStatus] = useState({ status: '' });
@@ -39,7 +36,6 @@ const RegisterPage = () => {
     },
     validate,
     onSubmit: async (values) => {
-      console.log(values);
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -99,6 +95,15 @@ const RegisterPage = () => {
               Register
             </button>
             <p className="text-red-500">{registerStatus.status}</p>
+            <p className="text-center pt-10">
+              Already have an account?{' '}
+              <p
+                onClick={() => navigate('/login')}
+                className="text-blue-500 font-medium cursor-pointer"
+              >
+                Login
+              </p>
+            </p>
           </form>
         </aside>
       </div>

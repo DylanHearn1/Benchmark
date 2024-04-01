@@ -6,10 +6,12 @@ interface TopThreeScoreProps {
 
 const TopThreeScore = ({ name, score, position }: TopThreeScoreProps) => {
   return (
-    <div className="text-white bg-yellow-500">
-      <p>{position}</p>
-      <h1>SCORE: {score}</h1>
-      <p>{name}</p>
+    <div className="text-white text-center justify-center border-gradient py-10 px-10">
+      <p className="pb-20 text-2xl font-bold">#{position}</p>
+      <div className="flex justify-between">
+        <p>{name}</p>
+        <h1>SCORE: {score}</h1>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import { ReactElement, useEffect, useState } from 'react';
 import Navbar from './Navbar';
-import { useAuthContext } from '../hooks/useAuthContext';
 import TopThreeScore from './TopThreeScore';
 
 interface userData {
@@ -21,8 +20,6 @@ const SingleGame = ({
   game,
   gameName,
 }: SingleGameProps) => {
-  const { loggedIn, username } = useAuthContext();
-
   const [globalHighScores, setGlobalHighScores] = useState<userData[]>([]);
 
   const url = `http://localhost:3000/userscore`;
@@ -38,10 +35,9 @@ const SingleGame = ({
           body: JSON.stringify({ gameName: `${gameName}` }),
         });
         const data = await response.json();
-        console.log(data);
         setGlobalHighScores(data);
       } catch {
-        console.log('error fetchin');
+        console.log('error fetching');
       }
     };
     fetchGlobal();
@@ -53,52 +49,44 @@ const SingleGame = ({
         <Navbar />
       </header>
       <main className="text-p bg-black text-white">
-        <div className="h-dvh  flex justify-center items-center">
-          <div className="space-y-10">
-            <div className="text-center">
-              <p>{title}</p>
-              <p className="opacity-75">{description}</p>
+        <div className="w-1280px mx-auto">
+          <div className="h-dvh  flex justify-center items-center">
+            <div className="space-y-10">
+              <div className="text-center">
+                <p>{title}</p>
+                <p className="opacity-75">{description}</p>
+              </div>
+              {game}
             </div>
-            {game}
+          </div>
+          <div className="grid grid-cols-3 gap-10">
+            {globalHighScores
+              .slice()
+              .sort((a, b) => (b[gameName] as number) - (a[gameName] as number))
+              .map((user, index) => (
+                <>
+                  {index <= 2 && (
+                    <TopThreeScore
+                      name={user.name}
+                      score={user[gameName] as number}
+                      position={index + 1}
+                    />
+                  )}
+                  {index > 2 && (
+                    <div className="col-span-3">
+                      <div className="text-white border-gradient text-center items-center py-3 px-10">
+                        <div className="flex justify-between opacity-80">
+                          <p>#{index + 1}</p>
+                          <p>{user.name}</p>
+                          <h1>SCORE: {user[gameName]}</h1>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </>
+              ))}
           </div>
         </div>
-        {globalHighScores
-          .slice()
-          .sort((a, b) => (b[gameName] as number) - (a[gameName] as number))
-          .map((user, index) => (
-            <>
-              {index === 0 ? (
-                <TopThreeScore
-                  name={user.name}
-                  score={user[gameName] as number}
-                  position={1}
-                />
-              ) : index === 1 ? (
-                <TopThreeScore
-                  name={user.name}
-                  score={user[gameName] as number}
-                  position={2}
-                />
-              ) : (
-                index === 2 && (
-                  <TopThreeScore
-                    name={user.name}
-                    score={user[gameName] as number}
-                    position={3}
-                  />
-                )
-              )}
-              {index > 2 && (
-                <div key={index}>
-                  <p className={user.name === username ? 'bg-blue-500' : ''}>
-                    {user.name}
-                  </p>
-                  <p>{user[gameName]}</p>
-                </div>
-              )}
-            </>
-          ))}
-        <button>test</button>
       </main>
     </>
   );

@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="fixed text-white text-p z-50 w-screen left-0 py-4 bg-black">
-        <div className="w-1280px mx-auto">
+        <div className="w-1280px mx-auto px-5">
           <ul className="flex items-center justify-between">
             <div onClick={() => navigate('/')} className="cursor-pointer">
               logo

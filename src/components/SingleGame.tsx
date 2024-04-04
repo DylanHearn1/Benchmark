@@ -2,6 +2,7 @@ import { ReactElement, useEffect, useState } from 'react';
 import React from 'react';
 import Navbar from './Navbar';
 import TopThreeScore from './TopThreeScore';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 interface userData {
   name: string;
@@ -24,6 +25,7 @@ const SingleGame = ({
   const [globalHighScores, setGlobalHighScores] = useState<userData[]>([]);
 
   const url = `http://localhost:3000/userscore`;
+  const { username } = useAuthContext();
 
   useEffect(() => {
     const fetchGlobal = async () => {
@@ -37,6 +39,7 @@ const SingleGame = ({
         });
         const data = await response.json();
         setGlobalHighScores(data);
+        console.log(data);
       } catch {
         console.log('error fetching');
       }
@@ -66,6 +69,9 @@ const SingleGame = ({
               .sort((a, b) => (b[gameName] as number) - (a[gameName] as number))
               .map((user, index) => (
                 <React.Fragment key={index}>
+                  {user.name === username &&
+                    (localStorage.setItem(`${gameName}`, `${user[gameName]}`),
+                    null)}
                   {index <= 2 && (
                     <TopThreeScore
                       name={user.name}

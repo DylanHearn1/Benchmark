@@ -33,6 +33,7 @@ const LoginPage = () => {
       setLoginStatus(data);
       if ('token' in data) {
         navigate('/');
+        localStorage.clear();
         setLoggedIn(true);
         setUsername(data.username);
       }

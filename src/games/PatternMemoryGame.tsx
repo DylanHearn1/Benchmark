@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const PatternMemory = () => {
   const squares = [0, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -8,6 +9,8 @@ const PatternMemory = () => {
   const [clickedSquare, setClickedSquare] = useState<Number>(10);
   const [gameScore, setGameScore] = useState(0);
   const [isGameActive, setIsGameActive] = useState(false);
+
+  const { loggedIn, username } = useAuthContext();
 
   const startRound = () => {
     setCorrectSequence((prev) => [...prev, Math.floor(Math.random() * 9)]);
@@ -25,6 +28,43 @@ const PatternMemory = () => {
     setClickedSquare(input);
     await new Promise((resolve) => setTimeout(resolve, 200));
     setClickedSquare(10);
+  };
+
+  const checkHighScore = async (score: number) => {
+    if (loggedIn) {
+      const storedValue = localStorage.getItem('patternMemory');
+      const highScore = storedValue !== null ? +storedValue : 0;
+
+      const stringScore = score.toString();
+
+      if (highScore === 0) {
+      }
+
+      if (score > highScore) {
+        localStorage.setItem('patternMemory', stringScore);
+
+        const url = 'http://localhost:3000/updateHighscore';
+
+        try {
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              username: username,
+              gameName: 'patternMemory',
+              score: score,
+            }),
+          });
+          const data = await response.json();
+          console.log(data);
+          localStorage.setItem('patternMemory', data.patternMemory);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }
   };
 
   useEffect(() => {
@@ -55,6 +95,7 @@ const PatternMemory = () => {
           setGameScore(attemptSequence.length);
         }
       } else {
+        checkHighScore(gameScore);
         setGameScore(0);
         setCorrectSequence([]);
         setAttemptSequence([]);

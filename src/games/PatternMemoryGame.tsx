@@ -37,9 +37,6 @@ const PatternMemory = () => {
 
       const stringScore = score.toString();
 
-      if (highScore === 0) {
-      }
-
       if (score > highScore) {
         localStorage.setItem('patternMemory', stringScore);
 

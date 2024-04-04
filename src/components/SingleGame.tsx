@@ -25,7 +25,7 @@ const SingleGame = ({
   const [globalHighScores, setGlobalHighScores] = useState<userData[]>([]);
 
   const url = `http://localhost:3000/userscore`;
-  const { username } = useAuthContext();
+  const { username, loggedIn } = useAuthContext();
 
   useEffect(() => {
     const fetchGlobal = async () => {
@@ -63,7 +63,7 @@ const SingleGame = ({
               {game}
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-20 gap-y-5">
             {globalHighScores
               .slice()
               .sort((a, b) => (b[gameName] as number) - (a[gameName] as number))
@@ -81,8 +81,14 @@ const SingleGame = ({
                   )}
                   {index > 2 && (
                     <div className="col-span-1 md:col-span-3">
-                      <div className="text-white border-gradient text-center items-center py-3 px-10">
-                        <div className="flex justify-between opacity-80">
+                      <div
+                        className={
+                          user.name === username && loggedIn
+                            ? 'border-gradient text-white text-center items-center py-3 px-10'
+                            : 'text-white text-center items-center py-3 px-10'
+                        }
+                      >
+                        <div className="flex justify-between flex-wrap">
                           <p>#{index + 1}</p>
                           <p>{user.name}</p>
                           <h1>SCORE: {user[gameName]}</h1>

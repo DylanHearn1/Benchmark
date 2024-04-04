@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 
 const LoginPage = () => {
-  const url = 'http://localhost:3000/login';
+  const url = `${import.meta.env.VITE_BACKEND_URL}login`;
   let navigate = useNavigate();
 
   const { setLoggedIn, setUsername } = useAuthContext();

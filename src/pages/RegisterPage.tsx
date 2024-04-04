@@ -25,7 +25,7 @@ const validate = (values: formValues) => {
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-  const url = 'http://localhost:3000/register';
+  const url = `${import.meta.env.VITE_BACKEND_URL}register`;
 
   const [registerStatus, setRegisterStatus] = useState({ status: '' });
 

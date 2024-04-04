@@ -40,7 +40,7 @@ const PatternMemory = () => {
       if (score > highScore) {
         localStorage.setItem('patternMemory', stringScore);
 
-        const url = 'http://localhost:3000/updateHighscore';
+        const url = `${import.meta.env.VITE_BACKEND_URL}updateHighscore`;
 
         try {
           const response = await fetch(url, {

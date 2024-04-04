@@ -24,7 +24,7 @@ const SingleGame = ({
 }: SingleGameProps) => {
   const [globalHighScores, setGlobalHighScores] = useState<userData[]>([]);
 
-  const url = `http://localhost:3000/userscore`;
+  const url = `${import.meta.env.VITE_BACKEND_URL}/userscore`;
   const { username, loggedIn } = useAuthContext();
 
   useEffect(() => {

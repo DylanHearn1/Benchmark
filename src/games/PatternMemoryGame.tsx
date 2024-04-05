@@ -55,7 +55,6 @@ const PatternMemory = () => {
             }),
           });
           const data = await response.json();
-          console.log(data);
           localStorage.setItem('patternMemory', data.patternMemory);
         } catch (e) {
           console.error(e);

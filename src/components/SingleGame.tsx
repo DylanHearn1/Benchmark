@@ -39,7 +39,6 @@ const SingleGame = ({
         });
         const data = await response.json();
         setGlobalHighScores(data);
-        console.log(data);
       } catch {
         console.log('error fetching');
       }

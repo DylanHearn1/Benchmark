@@ -44,7 +44,6 @@ const LoginPage = () => {
       }
 
       const data = await response.json();
-      console.log(data);
       setLoginStatus(data);
       if ('token' in data) {
         navigate('/');
@@ -58,7 +57,7 @@ const LoginPage = () => {
   return (
     <>
       <div className="bg-black min-h-dvh">
-        <aside className="bg-white md:w-1/2 lg:w-1/4 h-dvh my-auto flex flex-col justify-center text-p px-10 space-y-20">
+        <aside className="bg-white md:w-1/2 lg:w-1/4 h-dvh my-auto flex flex-col justify-center text-p px-10 space-y-10">
           <img
             src={logo}
             alt="logo"

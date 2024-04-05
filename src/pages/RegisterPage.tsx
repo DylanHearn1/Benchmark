@@ -83,9 +83,6 @@ const RegisterPage = () => {
                 className="py-2 px-3 border-input"
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.password && formik.errors.password ? (
-                <div className="text-red-500">{formik.errors.password}</div>
-              ) : null}
             </div>
             <button
               type="submit"

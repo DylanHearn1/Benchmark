@@ -73,9 +73,6 @@ const LoginPage = () => {
                 value={formik.values.username}
                 className="py-2 px-3 border-input "
               />
-              {formik.touched.username && formik.errors.username ? (
-                <div className="text-red-500">{formik.errors.username}</div>
-              ) : null}
             </div>
             <div className="flex flex-col space-y-2">
               <label htmlFor="password" className="font-medium opacity-75">

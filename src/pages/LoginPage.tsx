@@ -1,7 +1,20 @@
 import { useFormik } from 'formik';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { formValues } from './RegisterPage';
+
+const validate = (values: formValues) => {
+  const errors: { username?: string; password?: string } = {};
+  if (!values.username) {
+    errors.username = 'Required';
+  }
+
+  if (!values.password) {
+    errors.password = 'Required';
+  }
+  return errors;
+};
 
 const LoginPage = () => {
   const url = `${import.meta.env.VITE_BACKEND_URL}login`;
@@ -16,6 +29,7 @@ const LoginPage = () => {
       username: '',
       password: '',
     },
+    validate,
     onSubmit: async (values) => {
       const response = await fetch(url, {
         method: 'POST',
@@ -59,6 +73,9 @@ const LoginPage = () => {
                 value={formik.values.username}
                 className="py-2 px-3 border-input "
               />
+              {formik.touched.username && formik.errors.username ? (
+                <div className="text-red-500">{formik.errors.username}</div>
+              ) : null}
             </div>
             <div className="flex flex-col space-y-2">
               <label htmlFor="password" className="font-medium opacity-75">
@@ -71,6 +88,9 @@ const LoginPage = () => {
                 value={formik.values.password}
                 className="py-2 px-3 border-input"
               />
+              {formik.touched.password && formik.errors.password ? (
+                <div className="text-red-500">{formik.errors.password}</div>
+              ) : null}
             </div>
             <button
               type="submit"
@@ -81,12 +101,12 @@ const LoginPage = () => {
             <p className="text-red-500">{loginStatus.status}</p>
             <p className="text-center pt-10">
               Don't have an account?{' '}
-              <p
-                onClick={() => navigate('/register')}
+              <Link
+                to="/register"
                 className="text-blue-500 font-medium cursor-pointer"
               >
                 Register
-              </p>
+              </Link>
             </p>
           </form>
         </aside>

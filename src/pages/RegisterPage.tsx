@@ -1,8 +1,8 @@
 import { useFormik } from 'formik';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-interface formValues {
+export interface formValues {
   username: string;
   password: string;
 }
@@ -24,7 +24,6 @@ const validate = (values: formValues) => {
 };
 
 const RegisterPage = () => {
-  const navigate = useNavigate();
   const url = `${import.meta.env.VITE_BACKEND_URL}register`;
 
   const [registerStatus, setRegisterStatus] = useState({ status: '' });
@@ -97,12 +96,12 @@ const RegisterPage = () => {
             <p className="text-red-500">{registerStatus.status}</p>
             <p className="text-center pt-10">
               Already have an account?{' '}
-              <p
-                onClick={() => navigate('/login')}
+              <Link
+                to="/login"
                 className="text-blue-500 font-medium cursor-pointer"
               >
                 Login
-              </p>
+              </Link>
             </p>
           </form>
         </aside>

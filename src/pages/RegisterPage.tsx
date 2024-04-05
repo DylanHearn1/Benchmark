@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import logo from './../assets/logo.png';
 
 export interface formValues {
   username: string;
@@ -24,6 +25,7 @@ const validate = (values: formValues) => {
 };
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
   const url = `${import.meta.env.VITE_BACKEND_URL}register`;
 
   const [registerStatus, setRegisterStatus] = useState({ status: '' });
@@ -50,10 +52,18 @@ const RegisterPage = () => {
   return (
     <>
       <div className="bg-black min-h-dvh">
-        <aside className="bg-white w-1/4 h-dvh my-auto flex items-center text-p">
+        <aside className="bg-white md:w-1/2 lg:w-1/4 h-dvh my-auto flex flex-col justify-center text-p px-10 space-y-20">
+          <img
+            src={logo}
+            alt="logo"
+            onClick={() => navigate('/')}
+            width={'50px'}
+            className="absolute top-5 left-5 cursor-pointer"
+          />
+          <h1 className="font-medium text-2xl text-center">Register</h1>
           <form
             onSubmit={formik.handleSubmit}
-            className="text-black flex flex-col space-y-10 w-full px-10"
+            className="text-black flex flex-col space-y-10 w-full"
           >
             <div className="flex flex-col space-y-2">
               <label htmlFor="username" className="font-medium opacity-75">
@@ -90,16 +100,18 @@ const RegisterPage = () => {
             >
               Register
             </button>
-            <p className="text-red-500">{registerStatus.status}</p>
-            <p className="text-center pt-10">
-              Already have an account?{' '}
-              <Link
-                to="/login"
-                className="text-blue-500 font-medium cursor-pointer"
-              >
-                Login
-              </Link>
-            </p>
+            <div>
+              <p className="text-red-500">{registerStatus.status}</p>
+              <p className="text-center pt-10">
+                Already have an account?{' '}
+                <Link
+                  to="/login"
+                  className="text-blue-500 font-medium cursor-pointer"
+                >
+                  Login
+                </Link>
+              </p>
+            </div>
           </form>
         </aside>
       </div>

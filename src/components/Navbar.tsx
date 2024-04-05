@@ -4,6 +4,7 @@ import user from './../assets/user.svg';
 import { useState } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useNavigate } from 'react-router-dom';
+import logo from './../assets/logo.png';
 
 const Navbar = () => {
   const { loggedIn, setLoggedIn, username } = useAuthContext();
@@ -17,7 +18,7 @@ const Navbar = () => {
         <div className="w-1280px mx-auto px-5">
           <ul className="flex items-center justify-between">
             <div onClick={() => navigate('/')} className="cursor-pointer">
-              logo
+              <img src={logo} alt="" width={'40px'} />
             </div>
             {loggedIn ? (
               <>

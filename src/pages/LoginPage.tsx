@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { formValues } from './RegisterPage';
+import logo from './../assets/logo.png';
 
 const validate = (values: formValues) => {
   const errors: { username?: string; password?: string } = {};
@@ -57,10 +58,18 @@ const LoginPage = () => {
   return (
     <>
       <div className="bg-black min-h-dvh">
-        <aside className="bg-white w-1/4 h-dvh my-auto flex items-center text-p">
+        <aside className="bg-white md:w-1/2 lg:w-1/4 h-dvh my-auto flex flex-col justify-center text-p px-10 space-y-20">
+          <img
+            src={logo}
+            alt="logo"
+            onClick={() => navigate('/')}
+            width={'50px'}
+            className="absolute top-5 left-5 cursor-pointer"
+          />
+          <h1 className="font-medium text-2xl text-center">Log in</h1>
           <form
             onSubmit={formik.handleSubmit}
-            className="text-black flex flex-col space-y-10 w-full px-10"
+            className="text-black flex flex-col space-y-10 w-full"
           >
             <div className="flex flex-col space-y-2">
               <label htmlFor="username" className="font-medium opacity-75">
@@ -94,12 +103,14 @@ const LoginPage = () => {
             </div>
             <button
               type="submit"
-              className="bg-white border-2 rounded-lg w-1/4 bg-anchor-gradient py-1"
+              className="bg-white border-2 w-20 bg-anchor-gradient py-1 hover-"
             >
               Login
             </button>
+          </form>
+          <div>
             <p className="text-red-500">{loginStatus.status}</p>
-            <p className="text-center pt-10">
+            <p className="text-center">
               Don't have an account?{' '}
               <Link
                 to="/register"
@@ -108,7 +119,7 @@ const LoginPage = () => {
                 Register
               </Link>
             </p>
-          </form>
+          </div>
         </aside>
       </div>
     </>

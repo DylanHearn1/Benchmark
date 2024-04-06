@@ -2,6 +2,7 @@ import { useFormik } from 'formik';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from './../assets/logo.png';
+import eye from './../assets/eye-regular.svg';
 
 export interface formValues {
   username: string;
@@ -29,6 +30,7 @@ const RegisterPage = () => {
   const url = `${import.meta.env.VITE_BACKEND_URL}register`;
 
   const [registerStatus, setRegisterStatus] = useState({ status: '' });
+  const [showPassword, setShowPassword] = useState(true);
 
   const formik = useFormik({
     initialValues: {
@@ -52,7 +54,7 @@ const RegisterPage = () => {
   return (
     <>
       <div className="bg-black min-h-dvh">
-        <aside className="bg-white md:w-1/2 lg:w-1/4 h-dvh my-auto flex flex-col justify-center text-p px-10 space-y-20">
+        <aside className="bg-white md:w-1/2 lg:w-1/3 2xl:w-1/4 h-dvh my-auto flex flex-col justify-center text-p px-10 space-y-10">
           <img
             src={logo}
             alt="logo"
@@ -82,11 +84,20 @@ const RegisterPage = () => {
               ) : null}
             </div>
             <div className="flex flex-col space-y-2">
-              <label htmlFor="password" className="font-medium opacity-75">
-                Password
-              </label>
+              <div className="flex justify-between">
+                <label htmlFor="password" className="font-medium opacity-75">
+                  Password
+                </label>
+                <img
+                  src={eye}
+                  alt=""
+                  width={'20px'}
+                  className="opacity-50 cursor-pointer hover:opacity-75 ease-in duration-100"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                />
+              </div>
               <input
-                type="password"
+                type={showPassword ? 'password' : 'text'}
                 id="password"
                 onChange={formik.handleChange}
                 value={formik.values.password}
@@ -103,7 +114,7 @@ const RegisterPage = () => {
             <div>
               <p className="text-red-500">{registerStatus.status}</p>
               <p className="text-center pt-10">
-                Already have an account?{' '}
+                Already have an account? <br />
                 <Link
                   to="/login"
                   className="text-blue-500 font-medium cursor-pointer"

@@ -12,6 +12,11 @@ const Navbar = () => {
 
   let navigate = useNavigate();
 
+  const handleSignOut = () => {
+    setLoggedIn(false);
+    localStorage.clear();
+  };
+
   return (
     <>
       <nav className="fixed text-white text-p z-50 w-screen left-0 py-4 bg-black">
@@ -29,10 +34,7 @@ const Navbar = () => {
                   <img src={user} alt="" width={'20px'} className="invert" />
                   <p>{username}</p>
                   {showSignOut && (
-                    <button
-                      className="absolute top-20"
-                      onClick={() => setLoggedIn(false)}
-                    >
+                    <button className="absolute top-20" onClick={handleSignOut}>
                       Sign out
                     </button>
                   )}

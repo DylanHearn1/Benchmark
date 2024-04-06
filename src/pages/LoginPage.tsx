@@ -18,7 +18,8 @@ const validate = (values: formValues) => {
 };
 
 const LoginPage = () => {
-  const url = `${import.meta.env.VITE_BACKEND_URL}login`;
+  const loginUrl = `${import.meta.env.VITE_BACKEND_URL}login`;
+
   let navigate = useNavigate();
 
   const { setLoggedIn, setUsername } = useAuthContext();
@@ -32,7 +33,7 @@ const LoginPage = () => {
     },
     validate,
     onSubmit: async (values) => {
-      const response = await fetch(url, {
+      const response = await fetch(loginUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,6 +49,7 @@ const LoginPage = () => {
       if ('token' in data) {
         navigate('/');
         localStorage.clear();
+        localStorage.setItem('token', data.token);
         setLoggedIn(true);
         setUsername(data.username);
       }

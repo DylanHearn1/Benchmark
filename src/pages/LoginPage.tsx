@@ -33,6 +33,7 @@ const LoginPage = () => {
     },
     validate,
     onSubmit: async (values) => {
+      console.log(values);
       const response = await fetch(loginUrl, {
         method: 'POST',
         headers: {

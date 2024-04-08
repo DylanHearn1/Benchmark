@@ -39,11 +39,7 @@ const PatternMemory = ({ fetchHighscore }: PatternMemoryGameProps) => {
       const storedValue = localStorage.getItem('patternMemory');
       const highScore = storedValue !== null ? +storedValue : 0;
 
-      const stringScore = score.toString();
-
       if (score > highScore) {
-        localStorage.setItem('patternMemory', stringScore);
-
         const url = `${import.meta.env.VITE_BACKEND_URL}updateHighscore`;
 
         try {

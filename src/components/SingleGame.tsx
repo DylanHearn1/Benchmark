@@ -15,7 +15,7 @@ interface SingleGameProps {
   description: string;
   game: ReactElement;
   gameName: string;
-  fetchHighscores: boolean;
+  fetchHighscores?: boolean;
 }
 const SingleGame = ({
   title,

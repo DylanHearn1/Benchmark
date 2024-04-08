@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import LandingPage from './pages/LandingPage';
 import PatternMemoryPage from './pages/PatternMemoryPage';
+import VerbalMemoryPage from './pages/VerbalMemoryPage';
 
 export const logInContext = createContext<logInInterface>(null!);
 
@@ -62,6 +63,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/pattern-memory" element={<PatternMemoryPage />} />
+            <Route path="/verbal-memory" element={<VerbalMemoryPage />} />
           </Routes>
         </BrowserRouter>
       </logInContext.Provider>

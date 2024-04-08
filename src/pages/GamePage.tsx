@@ -10,6 +10,12 @@ const GamePage = () => {
         image={regularSquare}
         url="/pattern-memory"
       />
+      <GameCard
+        title="Verbal Memory"
+        description="Decide weather you have seen the displayed word or not."
+        image={regularSquare}
+        url="/verbal-memory"
+      />
     </div>
   );
 };

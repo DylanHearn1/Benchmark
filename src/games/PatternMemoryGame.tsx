@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 
-const PatternMemory = () => {
+interface PatternMemoryGameProps {
+  fetchHighscore: () => void;
+}
+
+const PatternMemory = ({ fetchHighscore }: PatternMemoryGameProps) => {
   const squares = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   const [correctSequence, setCorrectSequence] = useState<Number[]>([]);
   const [attemptSequence, setAttemptSequence] = useState<Number[]>([]);
@@ -56,6 +60,7 @@ const PatternMemory = () => {
           });
           const data = await response.json();
           localStorage.setItem('patternMemory', data.patternMemory);
+          fetchHighscore();
         } catch (e) {
           console.error(e);
         }

@@ -23,15 +23,20 @@ const Navbar = () => {
         <div className="w-1280px mx-auto px-5">
           <ul className="flex items-center justify-between">
             <div onClick={() => navigate('/')} className="cursor-pointer">
-              <img src={logo} alt="" width={'40px'} />
+              <img src={logo} alt="logo" width={'40px'} />
             </div>
             {loggedIn ? (
               <>
                 <div
-                  className="flex space-x-3 bg-anchor-gradient px-2 py-1"
+                  className="flex bg-anchor-gradient py-1 space-x-3 px-3"
                   onClick={() => setShowSignOut((prev) => !prev)}
                 >
-                  <img src={user} alt="" width={'20px'} className="invert" />
+                  <img
+                    src={user}
+                    alt="user icon"
+                    width={'20px'}
+                    className="invert"
+                  />
                   <p>{username}</p>
                   {showSignOut && (
                     <button className="absolute top-20" onClick={handleSignOut}>

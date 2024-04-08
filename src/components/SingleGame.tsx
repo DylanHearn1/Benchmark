@@ -15,12 +15,14 @@ interface SingleGameProps {
   description: string;
   game: ReactElement;
   gameName: string;
+  fetchHighscores: boolean;
 }
 const SingleGame = ({
   title,
   description,
   game,
   gameName,
+  fetchHighscores,
 }: SingleGameProps) => {
   const [globalHighScores, setGlobalHighScores] = useState<userData[]>([]);
 
@@ -44,7 +46,7 @@ const SingleGame = ({
       }
     };
     fetchGlobal();
-  }, []);
+  }, [fetchHighscores]);
 
   return (
     <>

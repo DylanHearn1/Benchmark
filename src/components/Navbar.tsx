@@ -39,7 +39,7 @@ const Navbar = () => {
                     width={'20px'}
                     className="invert"
                   />
-                  <p>{loggedIn ? username : '     '}</p>
+                  {loggedIn ? <p>{username}</p> : <p className="px-4"></p>}
                   {showSignOut && (
                     <button className="absolute top-20" onClick={handleSignOut}>
                       Sign out

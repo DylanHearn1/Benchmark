@@ -14,10 +14,10 @@ const LandingPage = () => {
             <span className="text-gradient font-semibold">Benchmark</span>
           </div>
           <div className="absolute bottom-8 w-40 h-12 animate-bounce">
-            <div className="w-full h-1.5 bg-white rounded-full opacity-75 absolute bottom-0"></div>
+            <div className="w-full h-1.5 bg-white rounded-full absolute bottom-0"></div>
           </div>
         </div>
-        <div className="min-h-dvh flex flex-col top-screen absolute bg-black border-top-2 border-slate-800 rounded-3xl w-full">
+        <div className="min-h-dvh flex flex-col top-screen absolute bg-black border-top-2 rounded-3xl w-full real-shadow mt-16">
           <GamePage />
         </div>
       </main>

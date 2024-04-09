@@ -17,7 +17,7 @@ export interface logInInterface {
 }
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [username, setUsername] = useState('');
 
   const tokenUrl = `${import.meta.env.VITE_BACKEND_URL}checkToken`;
@@ -49,6 +49,8 @@ function App() {
         }
       };
       checkToken();
+    } else {
+      setLoggedIn(false);
     }
   }, []);
 

@@ -10,7 +10,7 @@ const LandingPage = () => {
       <main>
         <div className="bg-black min-h-dvh flex flex-col justify-center items-center text-5xl text-white w-full fixed">
           <div className="w-1280px mx-auto text-center">
-            <p className="font-semibold">Brain</p>
+            <p className="font-semibold">Mind</p>
             <span className="text-gradient font-semibold">Benchmark</span>
           </div>
           <div className="absolute bottom-8 w-40 h-12 animate-bounce">

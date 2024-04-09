@@ -5,8 +5,13 @@ import { useState } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useNavigate } from 'react-router-dom';
 import logo from './../assets/logo.png';
+import ButtonSkeleton from './ButtonSkeleton';
 
-const Navbar = () => {
+interface NavbarProps {
+  skeleton?: boolean;
+}
+
+const Navbar = ({ skeleton }: NavbarProps) => {
   const { loggedIn, setLoggedIn, username } = useAuthContext();
   const [showSignOut, setShowSignOut] = useState(false);
 
@@ -27,7 +32,14 @@ const Navbar = () => {
             <div onClick={() => navigate('/')} className="cursor-pointer">
               <img src={logo} alt="logo" width={'40px'} />
             </div>
-            {loggedIn ? (
+            {skeleton ? (
+              <>
+                <div className="flex space-x-4">
+                  <ButtonSkeleton hollow={false} />
+                  <ButtonSkeleton hollow={true} />
+                </div>
+              </>
+            ) : loggedIn ? (
               <>
                 <div
                   className="flex bg-anchor-gradient py-1 space-x-3 px-3"

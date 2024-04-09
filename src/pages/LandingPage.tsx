@@ -1,11 +1,15 @@
 import GamePage from './GamePage';
 import Navbar from '../components/Navbar';
 
-const LandingPage = () => {
+interface LandingPageProps {
+  navbarSkeleton: boolean;
+}
+
+const LandingPage = ({ navbarSkeleton }: LandingPageProps) => {
   return (
     <>
       <header>
-        <Navbar />
+        <Navbar skeleton={navbarSkeleton} />
       </header>
       <main>
         <div className="bg-black min-h-dvh flex flex-col justify-center items-center text-5xl text-white w-full fixed">

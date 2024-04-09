@@ -17,8 +17,9 @@ export interface logInInterface {
 }
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
+  const [navbarSkeleton, setNavbarSkeleton] = useState(false);
 
   const tokenUrl = `${import.meta.env.VITE_BACKEND_URL}checkToken`;
 
@@ -26,6 +27,7 @@ function App() {
     const token = localStorage.getItem('token');
 
     if (token) {
+      setNavbarSkeleton(true);
       const checkToken = async () => {
         try {
           const response = await fetch(tokenUrl, {
@@ -40,8 +42,10 @@ function App() {
             const data = await response.json();
             setLoggedIn(true);
             setUsername(data.username);
+            setNavbarSkeleton(false);
           } else {
             setLoggedIn(false);
+            setNavbarSkeleton(false);
           }
         } catch (e) {
           console.error(e);
@@ -52,7 +56,7 @@ function App() {
     } else {
       setLoggedIn(false);
     }
-  }, []);
+  }, [LoginPage, App]);
 
   return (
     <>
@@ -61,7 +65,10 @@ function App() {
       >
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<LandingPage />} />
+            <Route
+              path="/"
+              element={<LandingPage navbarSkeleton={navbarSkeleton} />}
+            />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/pattern-memory" element={<PatternMemoryPage />} />

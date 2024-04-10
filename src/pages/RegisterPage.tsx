@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import { useState } from 'react';
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from './../assets/logo.png';
 import eye from './../assets/eye-regular.svg';
 import { useAuthContext } from '../hooks/useAuthContext';

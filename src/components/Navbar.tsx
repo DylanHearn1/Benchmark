@@ -22,8 +22,6 @@ const Navbar = ({ skeleton }: NavbarProps) => {
     localStorage.clear();
   };
 
-  // FIX NAVBAR LOADING FETCH!
-
   return (
     <>
       <nav className="fixed text-white text-p z-50 w-screen left-0 py-4 bg-black">

@@ -1,8 +1,9 @@
 import { useFormik } from 'formik';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 import logo from './../assets/logo.png';
 import eye from './../assets/eye-regular.svg';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 export interface formValues {
   username: string;
@@ -31,6 +32,7 @@ const RegisterPage = () => {
 
   const [registerStatus, setRegisterStatus] = useState({ status: '' });
   const [showPassword, setShowPassword] = useState(true);
+  const { setLoggedIn, setUsername } = useAuthContext();
 
   const formik = useFormik({
     initialValues: {
@@ -48,6 +50,10 @@ const RegisterPage = () => {
       });
       const data = await response.json();
       setRegisterStatus(data);
+      await new Promise((res) => setTimeout(res, 1000));
+      setLoggedIn(true);
+      setUsername(data.username);
+      navigate('/');
     },
   });
 

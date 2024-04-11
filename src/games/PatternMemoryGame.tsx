@@ -14,7 +14,7 @@ const PatternMemory = ({ fetchHighscore }: PatternMemoryGameProps) => {
   const [gameScore, setGameScore] = useState(0);
   const [isGameActive, setIsGameActive] = useState(false);
 
-  const { loggedIn, username } = useAuthContext();
+  const { loggedIn } = useAuthContext();
 
   const startRound = () => {
     setCorrectSequence((prev) => [...prev, Math.floor(Math.random() * 9)]);
@@ -49,7 +49,7 @@ const PatternMemory = ({ fetchHighscore }: PatternMemoryGameProps) => {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              username: username,
+              token: localStorage.getItem('token'),
               gameName: 'patternMemory',
               score: score,
             }),

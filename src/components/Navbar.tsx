@@ -12,13 +12,14 @@ interface NavbarProps {
 }
 
 const Navbar = ({ skeleton }: NavbarProps) => {
-  const { loggedIn, setLoggedIn, username } = useAuthContext();
+  const { loggedIn, setLoggedIn, username, setUsername } = useAuthContext();
   const [showSignOut, setShowSignOut] = useState(false);
 
   let navigate = useNavigate();
 
   const handleSignOut = () => {
     setLoggedIn(false);
+    setUsername('');
     localStorage.clear();
   };
 

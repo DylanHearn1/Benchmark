@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from './Navbar';
 import TopThreeScore from './TopThreeScore';
 import { useAuthContext } from '../hooks/useAuthContext';
+import TopThreeSkeleton from './TopThreeSkeleton';
 
 interface userData {
   name: string;
@@ -25,6 +26,7 @@ const SingleGame = ({
   fetchHighscores,
 }: SingleGameProps) => {
   const [globalHighScores, setGlobalHighScores] = useState<userData[]>([]);
+  const [waitingResults, setWaitingResults] = useState(true);
 
   const url = `${import.meta.env.VITE_BACKEND_URL}userscore`;
   const { username, loggedIn } = useAuthContext();
@@ -41,8 +43,10 @@ const SingleGame = ({
         });
         const data = await response.json();
         setGlobalHighScores(data);
-      } catch {
-        console.log('error fetching');
+        setWaitingResults(false);
+      } catch (e) {
+        console.log(e);
+        setWaitingResults(false);
       }
     };
     fetchGlobal();
@@ -65,40 +69,46 @@ const SingleGame = ({
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-x-20 gap-y-5">
-            {globalHighScores
-              .slice()
-              .sort((a, b) => (b[gameName] as number) - (a[gameName] as number))
-              .map((user, index) => (
-                <React.Fragment key={index}>
-                  {user.name === username &&
-                    (localStorage.setItem(`${gameName}`, `${user[gameName]}`),
-                    null)}
-                  {index <= 2 && (
-                    <TopThreeScore
-                      name={user.name}
-                      score={user[gameName] as number}
-                      position={index + 1}
-                    />
-                  )}
-                  {index > 2 && (
-                    <div className="col-span-1 md:col-span-3">
-                      <div
-                        className={
-                          user.name === username && loggedIn
-                            ? 'border-gradient text-white text-center items-center py-3 px-10'
-                            : 'text-white text-center items-center py-3 px-10'
-                        }
-                      >
-                        <div className="flex justify-between flex-wrap">
-                          <p>#{index + 1}</p>
-                          <p>{user.name}</p>
-                          <h1>SCORE: {user[gameName]}</h1>
+            {waitingResults ? (
+              <TopThreeSkeleton />
+            ) : (
+              globalHighScores
+                .slice()
+                .sort(
+                  (a, b) => (b[gameName] as number) - (a[gameName] as number)
+                )
+                .map((user, index) => (
+                  <React.Fragment key={index}>
+                    {user.name === username &&
+                      (localStorage.setItem(`${gameName}`, `${user[gameName]}`),
+                      null)}
+                    {index <= 2 && (
+                      <TopThreeScore
+                        name={user.name}
+                        score={user[gameName] as number}
+                        position={index + 1}
+                      />
+                    )}
+                    {index > 2 && (
+                      <div className="col-span-1 md:col-span-3">
+                        <div
+                          className={
+                            user.name === username && loggedIn
+                              ? 'border-gradient text-white text-center items-center py-3 px-10'
+                              : 'text-white text-center items-center py-3 px-10'
+                          }
+                        >
+                          <div className="flex justify-between flex-wrap">
+                            <p>#{index + 1}</p>
+                            <p>{user.name}</p>
+                            <h1>SCORE: {user[gameName]}</h1>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  )}
-                </React.Fragment>
-              ))}
+                    )}
+                  </React.Fragment>
+                ))
+            )}
           </div>
         </div>
       </main>

@@ -68,7 +68,7 @@ const SingleGame = ({
               {game}
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-20 gap-y-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-20 gap-y-5 mb-20">
             {waitingResults ? (
               <TopThreeSkeleton />
             ) : (
@@ -100,7 +100,15 @@ const SingleGame = ({
                         >
                           <div className="flex justify-between flex-wrap">
                             <p>#{index + 1}</p>
-                            <p>{user.name}</p>
+                            <p
+                              className={
+                                username === user.name
+                                  ? 'underline underline-offset-4 font-bold'
+                                  : ''
+                              }
+                            >
+                              {user.name}
+                            </p>
                             <h1>SCORE: {user[gameName]}</h1>
                           </div>
                         </div>

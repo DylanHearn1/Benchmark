@@ -14,15 +14,20 @@ const validate = (values: formValues) => {
   const errors: { username?: string; password?: string } = {};
   if (!values.username) {
     errors.username = 'Required';
-  } else if (values.username.length < 6) {
-    errors.username = 'Must be at least 6 characters';
+  } else if (values.username.length < 5) {
+    errors.username = 'Must be at least 5 characters';
+  } else if (values.username.length > 20) {
+    errors.username = 'Must be less than 20 characters';
   }
 
   if (!values.password) {
     errors.password = 'Required';
-  } else if (values.password.length < 10) {
-    errors.password = 'Must be at least 10 characters';
+  } else if (values.password.length < 8) {
+    errors.password = 'Must be at least 8 characters';
+  } else if (values.password.length > 30) {
+    errors.password = 'Must less than 40 characters';
   }
+
   return errors;
 };
 
@@ -110,6 +115,9 @@ const RegisterPage = () => {
                 className="py-2 px-3 border-input"
                 onBlur={formik.handleBlur}
               />
+              {formik.touched.password && formik.errors.password ? (
+                <div className="text-red-500">{formik.errors.password}</div>
+              ) : null}
             </div>
             <button
               type="submit"

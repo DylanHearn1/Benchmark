@@ -25,7 +25,7 @@ const Navbar = ({ skeleton }: NavbarProps) => {
 
   return (
     <>
-      <nav className="fixed text-white text-p z-50 w-screen left-0 py-4 bg-black">
+      <nav className="fixed text-white text-p z-50 w-screen left-0 py-4 bg-black top-0">
         <div className="w-1280px mx-auto px-5">
           <ul className="flex items-center justify-between">
             <div onClick={() => navigate('/')} className="cursor-pointer">

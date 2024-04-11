@@ -59,7 +59,7 @@ const SingleGame = ({
       </header>
       <main className="text-p bg-black text-white px-6">
         <div className="w-1280px mx-auto">
-          <div className="h-dvh  flex justify-center items-center">
+          <div className="min-h-dvh flex justify-center items-center mb-10">
             <div className="space-y-10">
               <div className="text-center">
                 <p>{title}</p>

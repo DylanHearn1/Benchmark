@@ -28,18 +28,20 @@ const Navbar = ({ skeleton }: NavbarProps) => {
       <nav className="fixed text-white text-p z-50 w-screen left-0 py-4 bg-black top-0">
         <div className="w-1280px mx-auto px-5">
           <ul className="flex items-center justify-between">
-            <div onClick={() => navigate('/')} className="cursor-pointer">
-              <img src={logo} alt="logo" width={'40px'} />
-            </div>
+            <li>
+              <div onClick={() => navigate('/')} className="cursor-pointer">
+                <img src={logo} alt="logo" width={'40px'} />
+              </div>
+            </li>
             {skeleton ? (
-              <>
+              <li>
                 <div className="flex space-x-4">
                   <ButtonSkeleton hollow={false} />
                   <ButtonSkeleton hollow={true} />
                 </div>
-              </>
+              </li>
             ) : loggedIn ? (
-              <>
+              <li>
                 <div
                   className="flex bg-anchor-gradient space-x-3 "
                   onClick={() => setShowSignOut((prev) => !prev)}
@@ -57,14 +59,13 @@ const Navbar = ({ skeleton }: NavbarProps) => {
                     </button>
                   )}
                 </div>
-              </>
+              </li>
             ) : (
-              <div className="items-center flex space-x-5">
+              <li className="items-center flex space-x-5">
                 <Link to={'/login'}>Login</Link>
-                <li>
-                  <AnchorGradient href="/register" text="Register" />
-                </li>
-              </div>
+
+                <AnchorGradient href="/register" text="Register" />
+              </li>
             )}
           </ul>
         </div>

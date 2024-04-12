@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react';
 import Words from '../components/words.ts';
+import { useAuthContext } from '../hooks/useAuthContext.ts';
 
-const VerbalMemoryGame = () => {
+interface VerbalMemoryGameProps {
+  fetchHighscore: () => void;
+}
+
+const VerbalMemoryGame = ({ fetchHighscore }: VerbalMemoryGameProps) => {
   const [wordPool, setWordPool] = useState<string[]>([]);
   const [seenWords, setSeenWords] = useState<string[]>([]);
   const [currentWord, setCurrentWord] = useState('');
@@ -10,7 +15,40 @@ const VerbalMemoryGame = () => {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
+  const { loggedIn } = useAuthContext();
+
+  const checkHighScore = async (score: number) => {
+    if (loggedIn) {
+      const storedValue = localStorage.getItem('verbalMemory');
+      const highScore = storedValue !== null ? +storedValue : 0;
+
+      if (score > highScore) {
+        const url = `${import.meta.env.VITE_BACKEND_URL}updateHighscore`;
+
+        try {
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              token: localStorage.getItem('token'),
+              gameName: 'verbalMemory',
+              score: score,
+            }),
+          });
+          const data = await response.json();
+          localStorage.setItem('verbalMemory', data.verbalMemory);
+          fetchHighscore();
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }
+  };
+
   const startGame = () => {
+    checkHighScore(score);
     setGameStart(true);
     setScore(0);
     setWordPool([]);

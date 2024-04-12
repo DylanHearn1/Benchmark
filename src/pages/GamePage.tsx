@@ -1,5 +1,6 @@
 import GameCard from '../components/GameCard';
 import regularSquare from './../assets/square-regular.svg';
+import verballogo from './../assets/a-solid.svg';
 
 const GamePage = () => {
   return (
@@ -12,8 +13,8 @@ const GamePage = () => {
       />
       <GameCard
         title="Verbal Memory"
-        description="Decide weather you have seen the displayed word or not."
-        image={regularSquare}
+        description="Recall an increasing amount of words, with three lives."
+        image={verballogo}
         url="/verbal-memory"
       />
     </div>

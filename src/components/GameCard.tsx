@@ -17,7 +17,7 @@ const GameCard = ({ title, description, image, url }: GameCardProps) => {
 
       <button
         onClick={() => navigate(`${url}`)}
-        className="bg-anchor-gradient py-1 px-5"
+        className="bg-anchor-gradient "
       >
         Play
       </button>

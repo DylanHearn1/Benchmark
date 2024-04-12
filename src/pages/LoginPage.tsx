@@ -115,7 +115,7 @@ const LoginPage = () => {
             </div>
             <button
               type="submit"
-              className="bg-white border-2 w-20 bg-anchor-gradient py-1 hover-"
+              className="bg-white border-2 w-20 bg-anchor-gradient"
             >
               Login
             </button>

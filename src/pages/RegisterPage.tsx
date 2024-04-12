@@ -121,7 +121,7 @@ const RegisterPage = () => {
             </div>
             <button
               type="submit"
-              className="bg-white border-2 rounded-lg w-1/4 bg-anchor-gradient py-1 hover:text-white"
+              className="bg-white border-2 rounded-lg w-1/4 bg-anchor-gradient hover:text-white"
             >
               Register
             </button>

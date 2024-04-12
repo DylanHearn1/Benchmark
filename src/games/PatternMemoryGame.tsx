@@ -117,8 +117,8 @@ const PatternMemory = ({ fetchHighscore }: PatternMemoryGameProps) => {
           ></button>
         ))}
       </div>
-      <div className="flex justify-between mt-10 space-x-10">
-        <button onClick={() => newRound()} className="bg-anchor-gradient px-2">
+      <div className="flex justify-between mt-10 space-x-10 items-center">
+        <button onClick={() => newRound()} className="bg-anchor-gradient">
           New game
         </button>
         <p>Score: {`${gameScore}`}</p>

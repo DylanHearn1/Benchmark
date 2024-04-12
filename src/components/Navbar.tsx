@@ -41,7 +41,7 @@ const Navbar = ({ skeleton }: NavbarProps) => {
             ) : loggedIn ? (
               <>
                 <div
-                  className="flex bg-anchor-gradient py-1 space-x-3 px-3"
+                  className="flex bg-anchor-gradient space-x-3 "
                   onClick={() => setShowSignOut((prev) => !prev)}
                 >
                   <img

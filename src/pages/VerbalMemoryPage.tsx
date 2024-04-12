@@ -6,7 +6,7 @@ const VerbalMemoryPage = () => {
     <>
       <SingleGame
         title="Verbal Memory"
-        description="Remember the words displayed, then recite it."
+        description="Recall an increasing amount of words, with three lives."
         game={<VerbalMemoryGame />}
         gameName="verbalMemory"
       />

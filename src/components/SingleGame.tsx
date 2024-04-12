@@ -26,7 +26,7 @@ const SingleGame = ({
   fetchHighscores,
 }: SingleGameProps) => {
   const [globalHighScores, setGlobalHighScores] = useState<userData[]>([]);
-  const [waitingResults, setWaitingResults] = useState(true);
+  const [waitingResults, setWaitingResults] = useState(false);
 
   const url = `${import.meta.env.VITE_BACKEND_URL}userscore`;
   const { username, loggedIn } = useAuthContext();
@@ -34,6 +34,7 @@ const SingleGame = ({
   useEffect(() => {
     const fetchGlobal = async () => {
       try {
+        setWaitingResults(true);
         const response = await fetch(url, {
           method: 'POST',
           headers: {
@@ -59,7 +60,7 @@ const SingleGame = ({
       </header>
       <main className="text-p bg-black text-white px-6">
         <div className="w-1280px mx-auto">
-          <div className="min-h-dvh flex justify-center items-center mb-10">
+          <div className="min-h-dvh flex justify-center items-center">
             <div className="space-y-10">
               <div className="text-center">
                 <p>{title}</p>
@@ -68,7 +69,7 @@ const SingleGame = ({
               {game}
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-20 gap-y-5 mb-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-20 gap-y-5">
             {waitingResults ? (
               <TopThreeSkeleton />
             ) : (

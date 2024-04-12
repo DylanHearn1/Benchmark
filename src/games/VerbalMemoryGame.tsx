@@ -48,7 +48,6 @@ const VerbalMemoryGame = ({ fetchHighscore }: VerbalMemoryGameProps) => {
   };
 
   const startGame = () => {
-    checkHighScore(score);
     setGameStart(true);
     setScore(0);
     setWordPool([]);
@@ -60,6 +59,7 @@ const VerbalMemoryGame = ({ fetchHighscore }: VerbalMemoryGameProps) => {
 
   useEffect(() => {
     if (!lives) {
+      checkHighScore(score);
       setGameOver(true);
       setGameStart(false);
       setLives(3);

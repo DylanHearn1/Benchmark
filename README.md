@@ -4,4 +4,4 @@ Designed for a seamless full-stack user experience with user authentication, bui
 
 ## Live site
 
-- https://https://benchmark.dylanhearn.co.uk/
+- https://benchmark.dylanhearn.co.uk/

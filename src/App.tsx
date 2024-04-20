@@ -50,13 +50,14 @@ function App() {
         } catch (e) {
           console.error(e);
           setLoggedIn(false);
+          setNavbarSkeleton(false);
         }
       };
       checkToken();
     } else {
       setLoggedIn(false);
     }
-  }, [LoginPage, App]);
+  }, []);
 
   return (
     <>

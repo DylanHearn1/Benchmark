@@ -17,6 +17,12 @@ const GamePage = () => {
         image={verballogo}
         url="/verbal-memory"
       />
+      <GameCard
+        title="Chimp Test"
+        description="Memorize the order of squares from ascending order."
+        image={verballogo}
+        url="/chimp"
+      />
     </div>
   );
 };

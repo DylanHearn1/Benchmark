@@ -1,6 +1,7 @@
 import GameCard from '../components/GameCard';
 import regularSquare from './../assets/square-regular.svg';
 import verballogo from './../assets/a-solid.svg';
+import numberone from './../assets/numberone.svg';
 
 const GamePage = () => {
   return (
@@ -20,7 +21,7 @@ const GamePage = () => {
       <GameCard
         title="Chimp Test"
         description="Memorize the order of squares from ascending order."
-        image={verballogo}
+        image={numberone}
         url="/chimp"
       />
     </div>

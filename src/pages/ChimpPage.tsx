@@ -16,7 +16,7 @@ const ChimpPage = () => {
         description="Memorize the order of squares from ascending order."
         // game={<ChimpGame fetchHighscore={fetchHighscores} />}
         game={<ChimpGame />}
-        gameName="verbalMemory"
+        gameName="chimpTest"
         fetchHighscores={fetchScores}
       />
     </>

@@ -121,7 +121,7 @@ const PatternMemory = ({ fetchHighscore }: PatternMemoryGameProps) => {
         <button onClick={() => newRound()} className="bg-anchor-gradient">
           New game
         </button>
-        <p>Score: {`${gameScore}`}</p>
+        <p>Score: {gameScore}</p>
       </div>
     </div>
   );

@@ -19,6 +19,11 @@ const ChimpGame = ({ fetchHighscore }: chimpGameProps) => {
     'md:w-20 md:h-20 h-16 w-16 grid-span-1 flex justify-center items-center text-2xl';
 
   const startGame = () => {
+    setCorrectSequence([]);
+    setSelectedSquares([]);
+    setScore(0);
+    setGameStarted(false);
+
     let randomNumber: number;
 
     if (correctSequence.length > 39) return;

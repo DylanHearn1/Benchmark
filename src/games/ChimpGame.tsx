@@ -18,11 +18,13 @@ const ChimpGame = ({ fetchHighscore }: chimpGameProps) => {
   const squareStyle =
     'md:w-20 md:h-20 h-16 w-16 grid-span-1 flex justify-center items-center text-2xl';
 
-  const startGame = () => {
-    setCorrectSequence([]);
-    setSelectedSquares([]);
-    setScore(0);
-    setGameStarted(false);
+  const startGame = (restart: boolean) => {
+    if (restart) {
+      setCorrectSequence([]);
+      setSelectedSquares([]);
+      setScore(0);
+      setGameStarted(false);
+    }
 
     let randomNumber: number;
 
@@ -47,7 +49,6 @@ const ChimpGame = ({ fetchHighscore }: chimpGameProps) => {
   const handleSquareClick = (index: number) => {
     setGameStarted(true);
     setSelectedSquares((prev) => [...prev, index]);
-    console.log(index);
   };
 
   const gameOver = () => {
@@ -64,19 +65,17 @@ const ChimpGame = ({ fetchHighscore }: chimpGameProps) => {
 
     if (selectedSquares.length < correctSequence.length) {
       JSON.stringify(selectedSquares) !==
-      JSON.stringify(correctSequence.slice(0, selectedSquares.length))
-        ? gameOver()
-        : console.log('getting there');
+        JSON.stringify(correctSequence.slice(0, selectedSquares.length)) &&
+        gameOver();
     } else if (
       JSON.stringify(selectedSquares) === JSON.stringify(correctSequence)
     ) {
-      console.log('correct sequence');
       setGameStarted(false);
       setSelectedSquares([]);
       setCorrectSequence([]);
       setRound((prev) => prev + 1);
       setScore((prev) => prev + 1);
-      startGame();
+      startGame(false);
     }
   }, [selectedSquares]);
 
@@ -103,7 +102,6 @@ const ChimpGame = ({ fetchHighscore }: chimpGameProps) => {
           const data = await response.json();
           localStorage.setItem('chimpGame', data.chimpGame);
           fetchHighscore();
-          console.log('done');
         } catch (e) {
           console.error(e);
         }
@@ -133,7 +131,7 @@ const ChimpGame = ({ fetchHighscore }: chimpGameProps) => {
         ))}
       </div>
       <div className="flex justify-around items-center">
-        <button onClick={startGame} className="bg-anchor-gradient">
+        <button onClick={() => startGame(true)} className="bg-anchor-gradient">
           Start
         </button>
         <p>Score: {score}</p>

@@ -1,11 +1,18 @@
 import { useEffect, useState } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext';
 
-const ChimpGame = () => {
+interface chimpGameProps {
+  fetchHighscore: () => void;
+}
+
+const ChimpGame = ({ fetchHighscore }: chimpGameProps) => {
   const [correctSequence, setCorrectSequence] = useState<number[]>([]);
   const [selectedSquares, setSelectedSquares] = useState<number[]>([]);
   const [gameStarted, setGameStarted] = useState(false);
   const [round, setRound] = useState(3);
   const [score, setScore] = useState(0);
+
+  const loggedIn = useAuthContext();
 
   const squares = Array.from({ length: 40 });
   const squareStyle =
@@ -39,6 +46,7 @@ const ChimpGame = () => {
   };
 
   const gameOver = () => {
+    checkHighScore(score);
     setRound(3);
     setSelectedSquares([]);
     setCorrectSequence([]);
@@ -66,6 +74,37 @@ const ChimpGame = () => {
       startGame();
     }
   }, [selectedSquares]);
+
+  const checkHighScore = async (score: number) => {
+    if (loggedIn) {
+      const storedValue = localStorage.getItem('chimpGame');
+      const highScore = storedValue !== null ? +storedValue : 0;
+
+      if (score > highScore) {
+        const url = `${import.meta.env.VITE_BACKEND_URL}updateHighscore`;
+
+        try {
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              token: localStorage.getItem('token'),
+              gameName: 'chimpGame',
+              score: score,
+            }),
+          });
+          const data = await response.json();
+          localStorage.setItem('chimpGame', data.chimpGame);
+          fetchHighscore();
+          console.log('done');
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }
+  };
 
   return (
     <>

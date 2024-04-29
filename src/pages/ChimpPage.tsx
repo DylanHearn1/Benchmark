@@ -12,11 +12,10 @@ const ChimpPage = () => {
   return (
     <>
       <SingleGame
-        title="Chimp Test"
+        title="Chimp Game"
         description="Memorize the order of squares from ascending order."
-        // game={<ChimpGame fetchHighscore={fetchHighscores} />}
-        game={<ChimpGame />}
-        gameName="chimpTest"
+        game={<ChimpGame fetchHighscore={fetchHighscores} />}
+        gameName="chimpGame"
         fetchHighscores={fetchScores}
       />
     </>
